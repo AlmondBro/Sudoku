@@ -61,9 +61,20 @@ public class Sudoku
         return flag;
     }
 
-    public boolean checkSubgridConstraints(int row, int col, int value) 
+    public boolean checkSubgridConstraints(int[][] grid, int row, int col, int value) 
     {
-        return true;
+        boolean flag = true;
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                if(grid[i+row][j+col] == value)
+                {
+                    flag=false;
+                }
+            }
+        } 
+        return flag;
     }
 
     public void show(int[][] board) 
