@@ -3,7 +3,21 @@ import java.util.Scanner;
 
 public class SudokuDriver
 {
-    public SudokuDriver() {}
+    private Sudoku sudoku; 
+
+    public SudokuDriver() {
+        Sudoku sudoku = new Sudoku();
+    }
+
+    public Sudoku getSudoku() 
+    {
+        return this.sudoku;
+    }
+
+    public void setSudoku(Sudoku newSudoku) 
+    {
+        this.sudoku = newSudoku;
+    }
 
      /* After the file has been opened, the content of the file can be read into
       the board array. Use a doubly nested loop as before.
@@ -12,18 +26,33 @@ public class SudokuDriver
         array. This completes the load() method. */
         public void load(String filename)  
         {
-            Scanner fin = null;
+            Scanner fileReader = null;
+            int[][] loadedBoard = new int[9][9]; 
             try
             {
-                fin = new Scanner(new FileReader(filename));
-                fin.close();
+                fileReader = new Scanner(new FileReader(filename));
+                while(fileReader.hasNext())
+                {
+                    System.out.println("Current Character:\t" + fileReader.next() );
+                    for (int i = 0; i < loadedBoard.length; i++) 
+                    {
+                        for (int j = 0; j < loadedBoard[i].length; j++) 
+                        {
+                            
+                            loadedBoard[i][j] = Integer.parseInt(fileReader.next());
+                        } //end inner for-loop
+                    } //end outer for-loop
+                    this.getSudoku().setBoard(loadedBoard);
+                } //end while loop
+
+                fileReader.close();
             }
             catch (Exception e)
             {
                 System.out.print("Error opening input file");
                 System.exit(0);
             }
-        }  
+        }  //end load() method
 
     /* TODO:
             commandline() {
@@ -89,7 +118,7 @@ invalid, it returns false, and the commandline method prints “false”.
 
     public static void main(String[]args)
     {
-        Sudoku sudoku = new Sudoku();
+        SudokuDriver sudokuDriver = new SudokuDriver(); 
         Scanner input = new Scanner(System.in);
         
         /* TODO:
@@ -108,13 +137,17 @@ invalid, it returns false, and the commandline method prints “false”.
             
         */
 
+        sudokuDriver.load("sudoku.txt");  
+        int[][] board = sudokuDriver.getSudoku().getBoard();
+        sudokuDriver.getSudoku().show(board);
+
         
-        sudoku.show(sudoku.getBoard());
-        //sudoku.show();
+
+        sudokuDriver.getSudoku().show(board);
+
 
         input.close();
 
-        SudokuDriver sudoDriver = new SudokuDriver(); 
-        sudoDriver.load("sudoku.txt");   
+       
     } //end main() method
 } //end SudokuDriver class

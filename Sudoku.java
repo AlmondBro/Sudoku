@@ -4,12 +4,14 @@ public class Sudoku
 {
     public static final int SUDOKU_ROWS = 9; //constants
     public static final int SUDOKU_COLUMNS = 9;
-    private int[][] board = new int[SUDOKU_ROWS][SUDOKU_COLUMNS];
+    private int[][] board;
 
     /**
      * Constructor for the Sudoku class.
      */
-    public Sudoku() {}
+    public Sudoku() {
+        board = new int[SUDOKU_ROWS][SUDOKU_COLUMNS];
+    }
 
     public void show(int[][] board) 
     {
@@ -47,6 +49,11 @@ public class Sudoku
     public int[][] getBoard()  
     {
         return this.board;
+    }
+
+    public void setBoard(int[][] newBoard) 
+    {
+        this.board = newBoard;
     }
 
 
