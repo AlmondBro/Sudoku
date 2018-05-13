@@ -123,24 +123,30 @@ invalid, it returns false, and the commandline method prints “false”.
 
             else if (cmd.equals("set"))
             {
-                int r = 1;
-                int c = 1;
-                int v = 1 ;
-                r--;
-                c--;
 
-                boolean rcheck = sudoku.checkRowConstraints(r, v);
-                boolean ccheck = sudoku.checkColumnConstraints(c, v);
-                boolean scheck = sudoku.checkSubgridConstraints(r, c, v);
+                Scanner userInput = new Scanner(System.in);
+
+                String userLine = userInput.nextLine();
+                String[] userInput_stringArray = userLine.split(" "); //split line
+
+                int row = Integer.parseInt(userInput_stringArray[1]) ;
+                int column = Integer.parseInt(userInput_stringArray[2]);
+                int value =  Integer.parseInt(userInput_stringArray[2]);
+                
+                row--;
+                column--;
+
+                boolean rcheck = sudoku.checkRowConstraints(row, value);
+                boolean ccheck = sudoku.checkColumnConstraints(column, value);
+                boolean scheck = sudoku.checkSubgridConstraints(row, column, value);
 
                 if (rcheck && ccheck && scheck) 
                 {
-                    sudoku.insert(r, c, v);
+                    sudoku.insert(row, column, value);
                 }
 
                 else 
                 {
-                    //Print error message
                     System.out.println("Error message");
                 }
             }
