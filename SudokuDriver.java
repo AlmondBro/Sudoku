@@ -90,8 +90,7 @@ invalid, it returns false, and the commandline method prints “false”.
 
         //sudokuDriver.load("sudoku.txt");  
         int[][] board = sudokuDriver.getSudoku().getBoard();
-        sudokuDriver.getSudoku().show(board); 
-
+        
         while (true) 
         {
             System.out.print("> ");
