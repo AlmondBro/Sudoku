@@ -56,15 +56,8 @@ public class SudokuDriver
         } 
         
     }  //end load() method
-
-    /* TODO: 
-    The user will also want to know if the current board is correct. If the user chooses “complete” command, the
-commandline method will call the isComplete method. If every row, column and subgrid is filled in with no invalid
-values, then it returns true, and the commandline method prints “true” on the screen. If any values are missing or
-invalid, it returns false, and the commandline method prints “false”.
-    
-    */
     public void commandLine() {
+        System.out.println("Please enter load, show, complete, set, or quit.");
         SudokuDriver sudokuDriver = new SudokuDriver(); 
         Scanner user_input = new Scanner(System.in);
         
@@ -112,26 +105,23 @@ invalid, it returns false, and the commandline method prints “false”.
 
                     boolean rcheck = sudoku.checkRowConstraints(row, value);
                     boolean ccheck = sudoku.checkColumnConstraints(column, value);
-                    boolean scheck = sudoku.checkSubgridConstraints(row, column, value);
+                    boolean scheck = sudoku.checkSubgridConstraints(board, row-row%3, column-column%3, value);
 
-                if (rcheck && ccheck && scheck) 
+                if (rcheck == true && ccheck == true && scheck == true) 
                 {   
                         System.out.println("Correct value to insert! You passed all the checks.");
-                        //sudokuDriver.getSudoku().insert(row, column, value);
+                        sudokuDriver.getSudoku().insert(row, column, value);
                 } 
 
                 else 
                 {
-                        System.out.println("Error message");
+                        System.out.println("Error Message");
+                        System.out.println("Please enter load, show, complete, set, or quit.");
                 } //end else-statement 
-                    sudokuDriver.getSudoku().insert(row, column, value);
+                   // sudokuDriver.getSudoku().insert(row, column, value);
                 } //end else-if
-
-                else 
-                {
-                    System.out.println("Please enter load, show, complete, set, or quit.");
-                } 
             } //end try block
+
             catch(ArrayIndexOutOfBoundsException e) 
             {
                 System.out.println("Please provide more arguments for the set command." + 
