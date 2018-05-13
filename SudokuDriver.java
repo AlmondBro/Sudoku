@@ -89,10 +89,10 @@ invalid, it returns false, and the commandline method prints “false”.
         Scanner user_input = new Scanner(System.in);
 
         //sudokuDriver.load("sudoku.txt");  
-        int[][] board = sudokuDriver.getSudoku().getBoard();
         
         while (true) 
         {
+            int[][] board = sudokuDriver.getSudoku().getBoard();
             System.out.print("> ");
             //Sudoku sudoku = new Sudoku();
             //int[][] board = sudoku.getBoard();
@@ -117,13 +117,11 @@ invalid, it returns false, and the commandline method prints “false”.
                 sudokuDriver.load("sudoku.txt");
                 System.out.println("Loaded text file. Enter show to see");
 
-                board = sudokuDriver.getSudoku().getBoard();
-                //sudokuDriver.getSudoku().show(board); 
             }
 
             else if (cmd.equals("set"))
             {
-                System.out.println("set");
+                System.out.println("Set called.");
                 Scanner userInput = new Scanner(System.in);
 
                 //String userLine = userInput.nextLine();
@@ -132,6 +130,10 @@ invalid, it returns false, and the commandline method prints “false”.
                 int row = Integer.parseInt(t[1]) ;
                 int column = Integer.parseInt(t[2]);
                 int value =  Integer.parseInt(t[3]);
+
+                System.out.println("Row:\t" + row);
+                System.out.println("Col:\t" + column);
+                System.out.println("Value:\t" + value);
                 
                 row--;
                 column--;
@@ -140,15 +142,18 @@ invalid, it returns false, and the commandline method prints “false”.
                 boolean ccheck = sudoku.checkColumnConstraints(column, value);
                 boolean scheck = sudoku.checkSubgridConstraints(row, column, value);
 
-                if (rcheck && ccheck && scheck) 
+               /* if (rcheck && ccheck && scheck) 
                 {
                     sudoku.insert(row, column, value);
-                }
+                } */
 
-                else 
+                sudoku.insert(row, column, value);
+                board = sudokuDriver.getSudoku().getBoard();
+
+               /* else 
                 {
                     System.out.println("Error message");
-                }
+                } */
             }
 
             else 

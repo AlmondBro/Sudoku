@@ -11,10 +11,11 @@ public class Sudoku
      */
     public Sudoku() {
         board = new int[SUDOKU_ROWS][SUDOKU_COLUMNS];
-        /*board = new int[][]{ {1,2,3,5,6,7,8, 9},
-        {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
-        {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
-        {1,2,3,5,6,7,8, 9}  }; */
+    }
+
+    public int[][] getBoard()  
+    {
+        return this.board;
     }
 
     public void setBoard(int[][] newBoard) 
@@ -22,19 +23,47 @@ public class Sudoku
         this.board = newBoard;
     }
     
-    public boolean insert(int row, int col, int value) 
-    {
-        return false;
+    public void insert(int row, int col, int value) 
+    {   
+        System.out.println("Inserting value...");
+        int[][] newBoard = this.getBoard();
+
+        // int[][] test = {{1, 1}, {2,2 }};
+        // System.out.println("Test[1][1]:\t" + test[0][0]);
+        // test[0][0] = 10;
+        // System.out.println("Test[1][1] modified:\t" + test[0][0]);
+
+        newBoard[row][col] = value;
+        System.out.println("newBoard[row][col]" +  newBoard[row][col]);
+
+        this.setBoard(newBoard);
     }
 
     public boolean checkRowConstraints(int row, int value) 
     {
-        return true;
+        board = this.getBoard();
+        boolean flag = true; 
+        for (int i = 0; i < board.length; i++) 
+        {
+            if (board[row][i] == value ) {
+                flag = false;
+            }
+        } //end for-loop
+
+        return flag;
     }
 
-    public boolean checkColumnConstraints(int col, int value) 
+    public boolean checkColumnConstraints(int column, int value) 
     {
-        return true;
+        board = this.getBoard();
+        boolean flag = true; 
+        for (int i = 0; i < board.length; i++) 
+        {
+            if (board[i][column] == value ) {
+                flag = false;
+            }
+        } //end for-loop
+        return flag;
     }
 
     public boolean checkSubgridConstraints(int row, int col, int value) 
@@ -80,12 +109,7 @@ public class Sudoku
                 } //end if-statement
             } //end for-loop
             System.out.println("");
-} //end outer for-loop
-    }
-
-    public int[][] getBoard()  
-    {
-        return this.board;
+        } //end outer for-loop
     }
 
 } //end Sudoku class
