@@ -47,6 +47,7 @@ invalid, it returns false, and the commandline method prints “false”.
     
     */
     public static void commandline() {
+        Sudoku sudoku = new Sudoku();
         Scanner in = new Scanner(System.in);
 
         while (true) 
@@ -63,19 +64,19 @@ invalid, it returns false, and the commandline method prints “false”.
 
             else if (cmd.equals("set"))
             {
-                int r;
-                int c;
-                int v;
+                int r = 1;
+                int c = 1;
+                int v = 1 ;
                 r--;
                 c--;
 
                 boolean rcheck = sudoku.checkRowConstraints(r, v);
                 boolean ccheck = sudoku.checkColumnConstraints(c, v);
-                boolean scheck = sudoku.checkSubgridContraints(r, c, v);
+                boolean scheck = sudoku.checkSubgridConstraints(r, c, v);
 
                 if (rcheck && ccheck && scheck) 
                 {
-                    sudoku.inset(r, c, v);
+                    sudoku.insert(r, c, v);
                 }
 
                 else 
@@ -88,6 +89,7 @@ invalid, it returns false, and the commandline method prints “false”.
 
     public static void main(String[]args)
     {
+        Sudoku sudoku = new Sudoku();
         Scanner input = new Scanner(System.in);
         
         /* TODO:
@@ -107,7 +109,8 @@ invalid, it returns false, and the commandline method prints “false”.
         */
 
         
-        show(board);
+        sudoku.show(sudoku.getBoard());
+        //sudoku.show();
 
         input.close();
 
