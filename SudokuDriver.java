@@ -123,15 +123,15 @@ invalid, it returns false, and the commandline method prints “false”.
 
             else if (cmd.equals("set"))
             {
-
+                System.out.println("set");
                 Scanner userInput = new Scanner(System.in);
 
-                String userLine = userInput.nextLine();
-                String[] userInput_stringArray = userLine.split(" "); //split line
+                //String userLine = userInput.nextLine();
+                //String[] userInput_stringArray = userLine.split(" "); //split line
 
-                int row = Integer.parseInt(userInput_stringArray[1]) ;
-                int column = Integer.parseInt(userInput_stringArray[2]);
-                int value =  Integer.parseInt(userInput_stringArray[2]);
+                int row = Integer.parseInt(t[1]) ;
+                int column = Integer.parseInt(t[2]);
+                int value =  Integer.parseInt(t[3]);
                 
                 row--;
                 column--;
