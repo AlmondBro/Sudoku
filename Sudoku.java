@@ -2,48 +2,35 @@ import java.io.*;
 import java.util.Scanner;
 public class Sudoku
 {
-    public static int[][] sudoku= new int[9][9];
+    public static final int SUDOKU_ROWS = 9; //constants
+    public static final int SUDOKU_COLUMNS = 9;
+    private int[][] board = new int[SUDOKU_ROWS][SUDOKU_COLUMNS];
 
-    public static void show(int[][] x)
+    /**
+     * Constructor for the Sudoku class.
+     */
+    public Sudoku() {}
+
+    public void show() 
     {
-        System.out.print("  ");
-         for(int i=1;i<=9;i++)
-            {
-                System.out.print(i+" ");
-                if(i == 3 || i == 6)
-                {
-                    System.out.print("   ");
-                } //end if-statement
-            } //end for-loop
-            System.out.println(); //line break
-        for(int i=0; i<x.length;i++)
-        {
-            if(i==3 || i==6)
-            {
-                System.out.print(" ======  | ====== | ======");
-                System.out.println();
-            } //end if-statement
 
-            System.out.print(i+1+" ");  
-            for(int j = 0; j < x[i].length; j++)
-            {
-                System.out.print(x[i][j] + " ");
-                if(j == 2 || j == 5)
-                {
-                    System.out.print(" | ");
-                } //end if-statement
-            } //end for-loop
-            System.out.println("");
-        } //end outer for-loop
-    } //end show method
+    }
 
-    public static void main(String[]args)
+    public boolean insert(int row, int col, int value) 
     {
-        Scanner input = new Scanner(System.in);
-        
-        show(sudoku);
+        return false;
+    }
 
-        input.close();
-        //load("sudoku.txt");
-    } //end main() method
-}
+    public boolean checkRowConstraints(int row, int value) {
+        return true;
+    }
+
+    public boolean checkColConstraints(int col, int value) {
+
+    }
+
+    public boolean checkSubgridConstraints(int row, int col, int value) 
+    {
+
+    }
+} //end Sudoku class
