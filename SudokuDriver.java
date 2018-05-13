@@ -19,63 +19,44 @@ public class SudokuDriver
         this.sudoku = newSudoku;
     }
 
-     /* After the file has been opened, the content of the file can be read into
-      the board array. Use a doubly nested loop as before.
-        Each time through the loop, read the next integer from the Scanner 
-        and assign the result to the current element of the board
-        array. This completes the load() method. */
-        public void load(String filename)  
-        {
-            Scanner fileReader = null;
-            int[][] loadedBoard = new int[9][9]; 
-            try {
-                fileReader = new Scanner(new FileReader(filename));
-                while(fileReader.hasNext())
+    public void load(String filename)  
+    {
+        Scanner fileReader = null;
+        int[][] loadedBoard = new int[9][9]; 
+        try {
+            fileReader = new Scanner(new FileReader(filename));
+            while(fileReader.hasNext())
+            {
+                //System.out.println("Current Character:\t" + fileReader.next() );
+                for (int i = 0; i < loadedBoard.length; i++) 
                 {
-                    //System.out.println("Current Character:\t" + fileReader.next() );
-                    for (int i = 0; i < loadedBoard.length; i++) 
+                    for (int j = 0; j < loadedBoard[i].length; j++) 
                     {
-                        for (int j = 0; j < loadedBoard[i].length; j++) 
-                        {
-                            
-                            loadedBoard[i][j] = Integer.parseInt(fileReader.next());;
-                        } //end inner for-loop
-                    } //end outer for-loop
-                    this.getSudoku().setBoard(loadedBoard);
-                } //end while loop
+                        
+                        loadedBoard[i][j] = Integer.parseInt(fileReader.next());;
+                    } //end inner for-loop
+                } //end outer for-loop
+                this.getSudoku().setBoard(loadedBoard);
+            } //end while loop
 
-                //fileReader.close();
-            } //end try
-           catch (FileNotFoundException e)
-            {
-                System.out.print("Error opening input file -- file not found exception");
-                System.exit(-1);
-            }
-            catch(NullPointerException e) 
-            {
-                int[][] newBoard = new int[][]{ {1,2,3,5,6,7,8, 9},
-                {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
-                {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
-                {1,2,3,5,6,7,8, 9}  };
-                this.getSudoku().setBoard(newBoard);
-            } 
-            
-        }  //end load() method
+            //fileReader.close();
+        } //end try
+        catch (FileNotFoundException e)
+        {
+            System.out.print("Error opening input file -- file not found exception");
+            System.exit(-1);
+        }
+        catch(NullPointerException e) 
+        {
+            int[][] newBoard = new int[][]{ {1,2,3,5,6,7,8, 9},
+            {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+            {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+            {1,2,3,5,6,7,8, 9}  };
+            this.getSudoku().setBoard(newBoard);
+        } 
+        
+    }  //end load() method
 
-    /* TODO:
-            commandline() {
-                create a Scanner to represent the keyboard as before
-                    while (true)
-                    {
-                    print out a prompt “> ” to let the user know to enter a command
-                    read the user’s input and store as a string. (use in.nextLine() not in.next())
-                    If input is “quit”, then break
-                    Else if input is “show” then call show();
-                    Else if input is “load” then call load(“testfile.txt”);
-                    Else tell the user the input is not recognized
-                    }
-                }
-    */
     /* TODO: 
     The user will also want to know if the current board is correct. If the user chooses “complete” command, the
 commandline method will call the isComplete method. If every row, column and subgrid is filled in with no invalid
@@ -83,85 +64,86 @@ values, then it returns true, and the commandline method prints “true” on th
 invalid, it returns false, and the commandline method prints “false”.
     
     */
-    public void commandline() {
-      
+    public void commandLine() {
         SudokuDriver sudokuDriver = new SudokuDriver(); 
         Scanner user_input = new Scanner(System.in);
-
-        //sudokuDriver.load("sudoku.txt");  
         
         while (true) 
         {
-            int[][] board = sudokuDriver.getSudoku().getBoard();
-            System.out.print("> ");
-            //Sudoku sudoku = new Sudoku();
-            //int[][] board = sudoku.getBoard();
-            String line = user_input.nextLine();
-            String[] t = line.split(" "); //split line
-            String cmd = t[0];
-
-            if (cmd.equals("quit")) 
-            {   
-                System.out.println("\n Quitting...");
-                break;
-            }
-
-            else if (cmd.equals("show"))  
-            {   
-                board = sudokuDriver.getSudoku().getBoard();
-                sudokuDriver.getSudoku().show(board); 
-            }
-
-            else if (cmd.equals("load"))  
-            {   
-                sudokuDriver.load("sudoku.txt");
-                System.out.println("Loaded text file. Enter show to see");
-
-            }
-
-            else if (cmd.equals("set"))
+            try 
             {
-                System.out.println("Set called.");
-                Scanner userInput = new Scanner(System.in);
+                int[][] board = sudokuDriver.getSudoku().getBoard();
+                System.out.print("> ");
+    
+                String line = user_input.nextLine();
+                String[] t = line.split(" "); //split line
+                String cmd = t[0];
 
-                //String userLine = userInput.nextLine();
-                //String[] userInput_stringArray = userLine.split(" "); //split line
+                if (cmd.equals("quit")) 
+                {   
+                    System.out.println("\n Quitting...See you later alligator, in a while crocodile!");
+                    user_input.close();
+                    break;
+                }
 
-                int row = Integer.parseInt(t[1]) ;
-                int column = Integer.parseInt(t[2]);
-                int value =  Integer.parseInt(t[3]);
+                else if (cmd.equals("show"))  
+                {   
+                    board = sudokuDriver.getSudoku().getBoard();
+                    sudokuDriver.getSudoku().show(board); 
+                }
 
-                System.out.println("Row:\t" + row);
-                System.out.println("Col:\t" + column);
-                System.out.println("Value:\t" + value);
-                
-                row--;
-                column--;
+                else if (cmd.equals("load"))  
+                {   
+                    sudokuDriver.load("sudoku.txt");
+                    System.out.println("Loaded text file. Enter show to see.");
+                }
 
-                boolean rcheck = sudoku.checkRowConstraints(row, value);
-                boolean ccheck = sudoku.checkColumnConstraints(column, value);
-                boolean scheck = sudoku.checkSubgridConstraints(row, column, value);
-
-               /* if (rcheck && ccheck && scheck) 
+                else if (cmd.equals("set"))
                 {
-                    sudoku.insert(row, column, value);
-                } */
+                    System.out.println("Set called.");
 
-                sudoku.insert(row, column, value);
-                board = sudokuDriver.getSudoku().getBoard();
+                    int row = Integer.parseInt(t[1]) ;
+                    int column = Integer.parseInt(t[2]);
+                    int value =  Integer.parseInt(t[3]);
 
-               /* else 
+                    //Decrement row and column values by one since Java arrays are 0-indexed.
+                    row--;
+                    column--;
+
+                    boolean rcheck = sudoku.checkRowConstraints(row, value);
+                    boolean ccheck = sudoku.checkColumnConstraints(column, value);
+                    boolean scheck = sudoku.checkSubgridConstraints(row, column, value);
+
+                if (rcheck && ccheck && scheck) 
+                {   
+                        System.out.println("Correct value to insert! You passed all the checks.");
+                        //sudokuDriver.getSudoku().insert(row, column, value);
+                } 
+
+                else 
                 {
-                    System.out.println("Error message");
-                } */
-            }
+                        System.out.println("Error message");
+                } //end else-statement 
+                    sudokuDriver.getSudoku().insert(row, column, value);
+                } //end else-if
 
-            else 
+                else 
+                {
+                    System.out.println("Please enter load, show, complete, set, or quit.");
+                } 
+            } //end try block
+            catch(ArrayIndexOutOfBoundsException e) 
             {
-                System.out.println("Please enter load, show, complete, set, or quit.");
-            }
-        }
-    }
+                System.out.println("Please provide more arguments for the set command." + 
+                " You need to input the row, column, and desired value.");
+            } //end catch-block
+
+            catch(NumberFormatException e) 
+            {
+                System.out.println("Please only input numbers from 1 to 9.");
+            } //end catch-block
+        } //end while loop
+    } //end commandLine() method
 
     public static void main(String[]args)
     {
@@ -171,14 +153,7 @@ invalid, it returns false, and the commandline method prints “false”.
         */
         SudokuDriver sudokuDriver = new SudokuDriver(); 
         
-
-        sudokuDriver.commandline();
-
-        /*
-        sudokuDriver.load("sudoku.txt");  
-        int[][] board = sudokuDriver.getSudoku().getBoard();
-        sudokuDriver.getSudoku().show(board); 
-        */
-
+        sudokuDriver.commandLine();
+        System.exit(0);
     } //end main() method
 } //end SudokuDriver class

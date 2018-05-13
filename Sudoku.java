@@ -26,15 +26,10 @@ public class Sudoku
     public void insert(int row, int col, int value) 
     {   
         System.out.println("Inserting value...");
+        System.out.println("Enter show to see the board with your new value.");
+        
         int[][] newBoard = this.getBoard();
-
-        // int[][] test = {{1, 1}, {2,2 }};
-        // System.out.println("Test[1][1]:\t" + test[0][0]);
-        // test[0][0] = 10;
-        // System.out.println("Test[1][1] modified:\t" + test[0][0]);
-
         newBoard[row][col] = value;
-        System.out.println("newBoard[row][col]" +  newBoard[row][col]);
 
         this.setBoard(newBoard);
     }
@@ -91,7 +86,7 @@ public class Sudoku
                 System.out.println();
             } //end if-statement
 
-            System.out.print( (i+1) +" ");  
+            System.out.print( (i+1) + " ");  
             for(int j = 0; j < board[i].length; j++)
             {
                 if (board[i][j] == 0) 
