@@ -83,20 +83,43 @@ values, then it returns true, and the commandline method prints “true” on th
 invalid, it returns false, and the commandline method prints “false”.
     
     */
-    public static void commandline() {
-        Sudoku sudoku = new Sudoku();
-        Scanner in = new Scanner(System.in);
+    public void commandline() {
+      
+        SudokuDriver sudokuDriver = new SudokuDriver(); 
+        Scanner user_input = new Scanner(System.in);
+
+        //sudokuDriver.load("sudoku.txt");  
+        int[][] board = sudokuDriver.getSudoku().getBoard();
+        sudokuDriver.getSudoku().show(board); 
 
         while (true) 
         {
             System.out.print("> ");
-            String line = in.nextLine();
+            //Sudoku sudoku = new Sudoku();
+            //int[][] board = sudoku.getBoard();
+            String line = user_input.nextLine();
             String[] t = line.split(" "); //split line
             String cmd = t[0];
 
-            if (cmd.equals(""))  //implement
-            {
+            if (cmd.equals("quit")) 
+            {   
+                System.out.println("\n Quitting...");
+                break;
+            }
 
+            else if (cmd.equals("show"))  
+            {   
+                board = sudokuDriver.getSudoku().getBoard();
+                sudokuDriver.getSudoku().show(board); 
+            }
+
+            else if (cmd.equals("load"))  
+            {   
+                sudokuDriver.load("sudoku.txt");
+                System.out.println("Loaded text file. Enter show to see");
+
+                board = sudokuDriver.getSudoku().getBoard();
+                //sudokuDriver.getSudoku().show(board); 
             }
 
             else if (cmd.equals("set"))
@@ -119,7 +142,13 @@ invalid, it returns false, and the commandline method prints “false”.
                 else 
                 {
                     //Print error message
+                    System.out.println("Error message");
                 }
+            }
+
+            else 
+            {
+                System.out.println("Please enter load, show, complete, set, or quit.");
             }
         }
     }
@@ -131,29 +160,15 @@ invalid, it returns false, and the commandline method prints “false”.
                 javac SudokuDriver.java; java SudokuDriver
         */
         SudokuDriver sudokuDriver = new SudokuDriver(); 
-        Scanner input = new Scanner(System.in);
         
-        /* TODO:
-            Your program should then display the content of the loaded file to 
-            the screen. At this point, make the following simple change.
-            The number 0 is a useful placeholder in the file, because it 
-            represents a blank position in the grid, and is not a valid input
-            value (all input values must be between 1 and 9).
-        */
 
-        /* TODO:
-        Add an if-else to the inner loop of your show() method, so that if the
-            value is 0, an underscore character “_” is displayed instead. 
-            If the number is any other value, then just display that value.
-            The resulting display of the test file will then look like this:
-            
-        */
+        sudokuDriver.commandline();
 
+        /*
         sudokuDriver.load("sudoku.txt");  
         int[][] board = sudokuDriver.getSudoku().getBoard();
-        sudokuDriver.getSudoku().show(board);
-
-        //input.close();
+        sudokuDriver.getSudoku().show(board); 
+        */
 
     } //end main() method
 } //end SudokuDriver class
