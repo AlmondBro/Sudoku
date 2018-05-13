@@ -65,7 +65,15 @@ public class Sudoku
             System.out.print( (i+1) +" ");  
             for(int j = 0; j < board[i].length; j++)
             {
-                System.out.print(board[i][j] + " ");
+                if (board[i][j] == 0) 
+                {
+                    System.out.print("_ ");
+                }
+                else
+                {
+                    System.out.print(board[i][j] + " ");
+                }    
+                    
                 if(j == 2 || j == 5)
                 {
                     System.out.print(" | ");
