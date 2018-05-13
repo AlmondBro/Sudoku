@@ -28,30 +28,40 @@ public class SudokuDriver
         {
             Scanner fileReader = null;
             int[][] loadedBoard = new int[9][9]; 
-            try
-            {
+            try {
                 fileReader = new Scanner(new FileReader(filename));
                 while(fileReader.hasNext())
                 {
-                    System.out.println("Current Character:\t" + fileReader.next() );
+                    //System.out.println("Current Character:\t" + fileReader.next() );
                     for (int i = 0; i < loadedBoard.length; i++) 
                     {
                         for (int j = 0; j < loadedBoard[i].length; j++) 
                         {
                             
-                            loadedBoard[i][j] = Integer.parseInt(fileReader.next());
+                            loadedBoard[i][j] = 1;
+                            //Integer.parseInt(fileReader.next());
+                            //System.out.println("Faze is a beasT!!!!");
                         } //end inner for-loop
                     } //end outer for-loop
                     this.getSudoku().setBoard(loadedBoard);
                 } //end while loop
 
-                fileReader.close();
-            }
-            catch (Exception e)
+                //fileReader.close();
+            } //end try
+           catch (FileNotFoundException e)
             {
-                System.out.print("Error opening input file");
-                System.exit(0);
+                System.out.print("Error opening input file -- file not found exception");
+                System.exit(-1);
             }
+            catch(NullPointerException e) 
+            {
+                int[][] newBoard = { {1,2,3,5,6,7,8, 9},
+                {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+                {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+                {1,2,3,5,6,7,8, 9}  };
+                this.getSudoku().setBoard(newBoard);
+            } 
+            
         }  //end load() method
 
     /* TODO:
@@ -141,13 +151,7 @@ invalid, it returns false, and the commandline method prints “false”.
         int[][] board = sudokuDriver.getSudoku().getBoard();
         sudokuDriver.getSudoku().show(board);
 
-        
+        //input.close();
 
-        sudokuDriver.getSudoku().show(board);
-
-
-        input.close();
-
-       
     } //end main() method
 } //end SudokuDriver class
