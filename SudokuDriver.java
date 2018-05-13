@@ -5,30 +5,107 @@ public class SudokuDriver
 {
     public SudokuDriver() {}
 
-    public static void load(String filename) {}
-
-    public static void commandline() {}
-
-
-
-    public void load(String filename)
-    {
-        Scanner fin = null;
-        try
+     /* After the file has been opened, the content of the file can be read into
+      the board array. Use a doubly nested loop as before.
+        Each time through the loop, read the next integer from the Scanner 
+        and assign the result to the current element of the board
+        array. This completes the load() method. */
+        public void load(String filename)  
         {
-            fin = new Scanner(new FileReader(filename));
-            fin.close();
-        }
-        catch (Exception e)
+            Scanner fin = null;
+            try
+            {
+                fin = new Scanner(new FileReader(filename));
+                fin.close();
+            }
+            catch (Exception e)
+            {
+                System.out.print("Error opening input file");
+                System.exit(0);
+            }
+        }  
+
+    /* TODO:
+            commandline() {
+                create a Scanner to represent the keyboard as before
+                    while (true)
+                    {
+                    print out a prompt “> ” to let the user know to enter a command
+                    read the user’s input and store as a string. (use in.nextLine() not in.next())
+                    If input is “quit”, then break
+                    Else if input is “show” then call show();
+                    Else if input is “load” then call load(“testfile.txt”);
+                    Else tell the user the input is not recognized
+                    }
+                }
+    */
+    /* TODO: 
+    The user will also want to know if the current board is correct. If the user chooses “complete” command, the
+commandline method will call the isComplete method. If every row, column and subgrid is filled in with no invalid
+values, then it returns true, and the commandline method prints “true” on the screen. If any values are missing or
+invalid, it returns false, and the commandline method prints “false”.
+    
+    */
+    public static void commandline() {
+        Scanner in = new Scanner(System.in);
+
+        while (true) 
         {
-            System.out.print("Error opening input file");
-            System.exit(0);
+            System.out.print("> ");
+            String line = in.nextLine();
+            String[] t = line.split(" "); //split line
+            String cmd = t[0];
+
+            if (cmd.equals(""))  //implement
+            {
+
+            }
+
+            else if (cmd.equals("set"))
+            {
+                int r;
+                int c;
+                int v;
+                r--;
+                c--;
+
+                boolean rcheck = sudoku.checkRowConstraints(r, v);
+                boolean ccheck = sudoku.checkColumnConstraints(c, v);
+                boolean scheck = sudoku.checkSubgridContraints(r, c, v);
+
+                if (rcheck && ccheck && scheck) 
+                {
+                    sudoku.inset(r, c, v);
+                }
+
+                else 
+                {
+                    //Print error message
+                }
+            }
         }
-    }  
+    }
 
     public static void main(String[]args)
     {
         Scanner input = new Scanner(System.in);
+        
+        /* TODO:
+            Your program should then display the content of the loaded file to 
+            the screen. At this point, make the following simple change.
+            The number 0 is a useful placeholder in the file, because it 
+            represents a blank position in the grid, and is not a valid input
+            value (all input values must be between 1 and 9).
+        */
+
+        /* TODO:
+        Add an if-else to the inner loop of your show() method, so that if the
+            value is 0, an underscore character “_” is displayed instead. 
+            If the number is any other value, then just display that value.
+            The resulting display of the test file will then look like this:
+            
+        */
+
         
         show(board);
 
