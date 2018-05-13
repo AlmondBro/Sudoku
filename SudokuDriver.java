@@ -107,19 +107,23 @@ public class SudokuDriver
                     boolean ccheck = sudoku.checkColumnConstraints(column, value);
                     boolean scheck = sudoku.checkSubgridConstraints(board, row-row%3, column-column%3, value);
 
-                if (rcheck == true && ccheck == true && scheck == true) 
-                {   
-                        System.out.println("Correct value to insert! You passed all the checks.");
-                        sudokuDriver.getSudoku().insert(row, column, value);
-                } 
+                    if (rcheck == true && ccheck == true && scheck == true) 
+                    {   
+                            System.out.println("Correct value to insert! You passed all the checks.");
+                            sudokuDriver.getSudoku().insert(row, column, value);
+                    } 
 
-                else 
-                {
-                        System.out.println("Error Message");
-                        System.out.println("Please enter load, show, complete, set, or quit.");
-                } //end else-statement 
+                    else 
+                    {
+                            System.out.println("Invalid number! Please try a different number or on a different row/column.");
+                            
+                    } //end else-statement 
                    // sudokuDriver.getSudoku().insert(row, column, value);
                 } //end else-if
+
+                else {
+                    System.out.println("Please enter load, show, complete, set, or quit.");
+                }
             } //end try block
 
             catch(ArrayIndexOutOfBoundsException e) 
