@@ -6,7 +6,7 @@ public class SudokuDriver
     private Sudoku sudoku; 
 
     public SudokuDriver() {
-        Sudoku sudoku = new Sudoku();
+      sudoku = new Sudoku();
     }
 
     public Sudoku getSudoku() 
@@ -38,9 +38,7 @@ public class SudokuDriver
                         for (int j = 0; j < loadedBoard[i].length; j++) 
                         {
                             
-                            loadedBoard[i][j] = 1;
-                            //Integer.parseInt(fileReader.next());
-                            //System.out.println("Faze is a beasT!!!!");
+                            loadedBoard[i][j] = Integer.parseInt(fileReader.next());;
                         } //end inner for-loop
                     } //end outer for-loop
                     this.getSudoku().setBoard(loadedBoard);
@@ -55,7 +53,7 @@ public class SudokuDriver
             }
             catch(NullPointerException e) 
             {
-                int[][] newBoard = { {1,2,3,5,6,7,8, 9},
+                int[][] newBoard = new int[][]{ {1,2,3,5,6,7,8, 9},
                 {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
                 {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
                 {1,2,3,5,6,7,8, 9}  };
@@ -128,6 +126,10 @@ invalid, it returns false, and the commandline method prints “false”.
 
     public static void main(String[]args)
     {
+        /*
+            To run, paste in command line:
+                javac SudokuDriver.java; java SudokuDriver
+        */
         SudokuDriver sudokuDriver = new SudokuDriver(); 
         Scanner input = new Scanner(System.in);
         

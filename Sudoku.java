@@ -11,6 +11,35 @@ public class Sudoku
      */
     public Sudoku() {
         board = new int[SUDOKU_ROWS][SUDOKU_COLUMNS];
+        /*board = new int[][]{ {1,2,3,5,6,7,8, 9},
+        {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+        {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9}, {1,2,3,5,6,7,8, 9},
+        {1,2,3,5,6,7,8, 9}  }; */
+    }
+
+    public void setBoard(int[][] newBoard) 
+    {
+        this.board = newBoard;
+    }
+    
+    public boolean insert(int row, int col, int value) 
+    {
+        return false;
+    }
+
+    public boolean checkRowConstraints(int row, int value) 
+    {
+        return true;
+    }
+
+    public boolean checkColumnConstraints(int col, int value) 
+    {
+        return true;
+    }
+
+    public boolean checkSubgridConstraints(int row, int col, int value) 
+    {
+        return true;
     }
 
     public void show(int[][] board) 
@@ -51,29 +80,4 @@ public class Sudoku
         return this.board;
     }
 
-    public void setBoard(int[][] newBoard) 
-    {
-        this.board = newBoard;
-    }
-
-
-    public boolean insert(int row, int col, int value) 
-    {
-        return false;
-    }
-
-    public boolean checkRowConstraints(int row, int value) 
-    {
-        return true;
-    }
-
-    public boolean checkColumnConstraints(int col, int value) 
-    {
-        return true;
-    }
-
-    public boolean checkSubgridConstraints(int row, int col, int value) 
-    {
-        return true;
-    }
 } //end Sudoku class
